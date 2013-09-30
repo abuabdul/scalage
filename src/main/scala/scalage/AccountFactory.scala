@@ -1,14 +1,14 @@
 package scalage
 
 import spray.json._
-import scalage.models.Account
 import DefaultJsonProtocol._
+import scalage.models.Account
 
 class AccountFactory {
 
   var requestString = ""
   private val account = (key: String, value: String) => {
-    this.requestString = this.requestString + s" ${key} : ${value} " + ","
+    this.requestString = this.requestString + "\"" + s"${key}" + "\"" +" : " +"\"" + s"${value}"+"\"" + ","
     this
   }
 
@@ -20,15 +20,11 @@ class AccountFactory {
 
   def createAccount = {
     val json = "{" + this.requestString.substring(0, this.requestString.length() - 1) + "}"
+    val x = json.asJson
+    println(x)
     import scalage.models.ScalageModelProtocol._
-    val x = json.toJson
     x.convertTo[Account]
   }
 
-}
-
-object AccountFactory extends App {
-  val af = new AccountFactory
-  println(af.userName("prassee").password("prassee").container("scalage").createAccount)
 }
 
