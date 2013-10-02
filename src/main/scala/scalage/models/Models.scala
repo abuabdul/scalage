@@ -4,20 +4,22 @@ import spray.json._
 import DefaultJsonProtocol._
 import scalage.AccountFactory
 
-case class Account(name: String, password: String, container: String)
+object ScalageConverters {
+  import scalage.models.ScalageModelProtocol._
 
-object ScalageModelProtocol extends DefaultJsonProtocol {
-  implicit val modelFormat = jsonFormat3(Account)
+  private val containerJson = (y: String) => "{\"containers\" : " + y + " }"
+  implicit val toContainers = (x: String) => {
+    val container = containerJson(x).asJson
+    container.convertTo[Containers]
+  }
 }
 
 object Main extends App {
-   import scalage.models.ScalageModelProtocol._
-   val ac = Account("pras","pras","cont")
-   println(ac.toJson)
-   val x = ac.toJson
-   val aco = x.convertTo[Account]
-   println(aco.name)
-   
-     val af = new AccountFactory
-  println(af.userName("prassee").password("prassee").container("scalage").createAccount)
+
+  import scalage.models.ScalageConverters._
+
+  val x = "[{\"count\": 0, \"bytes\": 0, \"name\": \"scalage\"}, {\"count\": 0, \"bytes\": 0, \"name\": \"scalage-swift\"}]".containers
+  x.foreach(f => {
+    println(f.name)
+  })
 }

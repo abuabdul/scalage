@@ -30,18 +30,25 @@ object SwiftService extends App {
 
   println(resp)
 
-  // createContainer("scalage")
+  // createContainer("scalage-swift")
   listContainers
-  
+  listObjectsInContainer("scalage")
+
   def listContainers = {
     val contList = client.get(new URL(resp.storageUrl + "?format=json"),
       Headers(Map("X-Auth-Token" -> resp.authToken)))
-    println(contList.body)
+    println(contList.body.asString)
   }
 
   def createContainer(cont: String) = {
     val rb = RequestBody.apply("", MediaType.TEXT_PLAIN)
-    client.put(new URL(resp.storageUrl+"/"+cont),rb,Headers(Map("X-Auth-Token" -> resp.authToken)))
+    client.put(new URL(resp.storageUrl + "/" + cont), rb, Headers(Map("X-Auth-Token" -> resp.authToken)))
+  }
+
+  def listObjectsInContainer(cont: String) = {
+    val rb = RequestBody.apply("", MediaType.TEXT_PLAIN)
+    val containers = client.get(new URL(resp.storageUrl + "/" + cont), Headers(Map("X-Auth-Token" -> resp.authToken)))
+    println(containers.body)
   }
 
 }
