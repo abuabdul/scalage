@@ -1,4 +1,3 @@
-
 package scalage.models
 
 import spray.json._
