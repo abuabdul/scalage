@@ -28,15 +28,15 @@ object SwiftService {
     resp
   }
 
-  def apply(swiftReq: SwiftAuthRequest,
-    httpClient: HttpClient) = new SwiftService(getSwiftResponse(swiftReq), client)
+  def apply(swiftReq: SwiftAuthRequest) = new SwiftService(getSwiftResponse(swiftReq), client)
 
 }
 
 class SwiftService(swiftResponse: SwiftAuthResponse, client: HttpClient) {
 
-  def listContainers = client.get(new URL(swiftResponse.storageUrl + "?format=json"),
-    Headers(Map("X-Auth-Token" -> swiftResponse.authToken))).body.asString
+  def listContainers =
+    client.get(new URL(swiftResponse.storageUrl + "?format=json"),
+      Headers(Map("X-Auth-Token" -> swiftResponse.authToken))).body.asString
 
   def createContainer(cont: String) = {
     val rb = RequestBody.apply("", MediaType.TEXT_PLAIN)
