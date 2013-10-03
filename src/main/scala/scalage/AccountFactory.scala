@@ -8,7 +8,7 @@ class AccountFactory {
 
   var requestString = ""
   private val account = (key: String, value: String) => {
-    this.requestString = this.requestString + "\"" + s"${key}" + "\"" +" : " +"\"" + s"${value}"+"\"" + ","
+    this.requestString = this.requestString + "\"" + s"${key}" + "\"" + " : " + "\"" + s"${value}" + "\"" + ","
     this
   }
 
