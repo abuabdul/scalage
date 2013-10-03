@@ -5,9 +5,8 @@ import DefaultJsonProtocol._
 
 case class Containers(containers: List[Container])
 case class Container(count: Int, bytes: Int, name: String)
-case class Account(name: String, password: String, container: String)
 
-case class SwiftAuthResponse(storageUrl: String, authToken: String, storageToken: String)
+case class Account(storageUrl: String, authToken: String, storageToken: String)
 case class SwiftAuthRequest(url: String, name: String, password: String)
 
 object ScalageModelProtocol extends DefaultJsonProtocol {
