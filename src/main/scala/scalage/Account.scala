@@ -20,14 +20,15 @@ class Account(account: AccountModel) {
   import scalage.ScalageConverters._
   import scalage.AccountCommand._
 
-  def getAccount = account
-
   def listContainers = listAllContainers(account).containers
 
   def getContainer(name: String) = {
     val list = listContainers.filter(x => x.name.equals(name))
-    if (list.isEmpty) None else Option(list.head)
+    if (list.isEmpty) None else Option(new Container(account, list.head))
   }
 
-  def createContainer(name: String) = createNewContainer(account, name)
+  def createContainer(name: String) = {
+    createNewContainer(account, name)
+    getContainer(name).get
+  }
 }
