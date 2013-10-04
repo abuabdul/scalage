@@ -4,7 +4,6 @@ import scalage.ScalageConverters._
 import scalage.ContainerModel
 import scalage.SwiftAuthRequest
 import scalage.SwiftConnector._
-import scalage.ContainerService
 
 object APIUsage extends App {
 
@@ -20,21 +19,5 @@ object APIUsage extends App {
   println(account.getContainer("welcome"))
 
   println(account.getContainer("wel").isDefined)
-
-  // create container   
-  // contSvc.createContainer("scalage-swift-02")
-
-  // list all containers
-  /*val contSvc = new ContainerService(account, "scalage")
-
-  println("listing containers")
-  contSvc.listContainers.foreach(container => {
-    println(container.name)
-  })
-
-  contSvc.getContainer
-
-  println("listing objects in container")
-  contSvc.listObjectsInContainer("scalage")*/
 
 }
