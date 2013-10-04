@@ -20,7 +20,5 @@ object APIUsage extends App {
   
   val container = cont2.get
   println(container.listItems)
-  
-  
 
 }
