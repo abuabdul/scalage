@@ -1,11 +1,12 @@
-package scalage.models
+package scalage
 
 import spray.json._
-import DefaultJsonProtocol._
-import scalage.AccountFactory
+import spray.json.DefaultJsonProtocol._
+import scalage.ScalageModelProtocol.contsModelFormat
 
 object ScalageConverters {
-  import scalage.models.ScalageModelProtocol._
+  
+  import scalage.ScalageModelProtocol._
 
   private val containerJson = (y: String) => "{\"containers\" : " + y + " }"
   implicit val toContainers = (x: String) => {
