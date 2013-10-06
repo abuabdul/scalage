@@ -4,6 +4,8 @@ import scalage.ScalageConverters._
 import scalage.ContainerModel
 import scalage.SwiftAuthRequest
 import scalage.SwiftConnector._
+import java.io.File
+import scalage.SwiftObject
 
 object APIUsage extends App {
 
@@ -14,11 +16,16 @@ object APIUsage extends App {
   // val cont2 =  account.createContainer("welcome3")
 
   println(account.listContainers)
-  
+
   val cont2 = account.getContainer("scalage")
   println(cont2.isDefined)
-  
-  val container = cont2.get
-  println(container.listItems)
 
+  val container = cont2.get
+
+  container.listItems
+
+  val f2up = new File("ppt.pptx")
+  val swiftObj = SwiftObject("ppt", "ppt", f2up)
+  // container.uploadObject(swiftObj)
+  println(container.listItems)
 }
