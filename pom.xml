@@ -16,6 +16,17 @@
 		<scala.version>2.10.0</scala.version>
 	</properties>
 
+	<distributionManagement>
+		<repository>
+			<id>repo</id>
+			<url>https://github.com/prassee/moma/raw/master/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot-repo</id>
+			<url>https://github.com/prassee/moma/raw/master/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<repositories>
 		<repository>
 			<id>big bee consultants</id>
