@@ -3,15 +3,17 @@ package scalage.api.usage
 import scalage.ScalageConverters._
 import scalage.ContainerModel
 import scalage.SwiftAuthRequest
-import scalage.SwiftConnector._
 import java.io.File
 import scalage.SwiftObject
+import scalage.SwiftConnector
 
 object APIUsage extends App {
 
+  val swiftCxn = SwiftConnector("admin:admin", "admin",
+    "http://15.185.191.158:8080/auth/v1.0")
+  
   // connect to swift 
-  val account = connect(auth("admin:admin", "admin",
-    "http://15.185.191.158:8080/auth/v1.0"))
+  val account = swiftCxn.connect
 
   // val cont2 =  account.createContainer("welcome3")
 
