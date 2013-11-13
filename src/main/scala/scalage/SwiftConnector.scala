@@ -9,11 +9,16 @@ import uk.co.bigbeeconsultants.http.header.MediaType
 import uk.co.bigbeeconsultants.http.request.RequestBody
 
 object SwiftConnector {
+  def apply(name: String, key: String, url: String) = {
+    new SwiftConnector(SwiftAuthRequest(name, key, url))
+  }
+}
+
+class SwiftConnector(x: SwiftAuthRequest) {
+
   private val client = new HttpClient
 
-  val auth = (name: String, key: String, url: String) => SwiftAuthRequest(name, key, url)
-
-  def connect = (x: SwiftAuthRequest) => {
+  def connect = {
     var resp = AccountModel("", "", "")
     client.get(new URL(x.url), Headers(Map("x-auth-user" -> x.name,
       "x-auth-key" -> x.password))).headers.foreach(f => {
