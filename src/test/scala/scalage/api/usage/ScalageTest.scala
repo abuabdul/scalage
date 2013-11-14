@@ -6,29 +6,35 @@ import org.specs2.runner._
 import scalage.SwiftConnector
 
 @RunWith(classOf[JUnitRunner])
-class MySpecTest extends Specification {
-  var x = 0
-
+class APITest extends Specification {
   val swiftCxn = SwiftConnector("admin:admin", "admin",
-    "http://15.185.191.158:8080/auth/v1.0")
+    "http://15.185.162.30:8080/auth/v1.0")
+  val account = swiftCxn.connect
 
-  "The 'Hello world' string" should {
-    "contain 11 characters" in {
-      x = 1
-      
-      "Hello world" must have size (11)
-    }
-    "start with 'Hello'" in {
-      x must equalTo(1)
-      "Hello world" must startWith("Hello")
-    }
-    "end with 'world'" in {
-      "Hello world" must endWith("world")
+  "The API if connected with url and primary auth" should {
+    val accountModel = account.getAccountModel
+    "get Account whose AccountModel" in {
+      assert(accountModel.authToken != null)
+      assert(accountModel.storageToken != null)
+      assert(accountModel.authToken != null)
     }
   }
 
-}
+  "Once logged in and using the Account object the API" should {
+    var containers = 0
+    "allow its client to list all containers" in {
+      account.listContainers.foreach(f=>println(f.name))
+      containers = account.listContainers.size
+      assert(account.listContainers.isEmpty || !account.listContainers.isEmpty)
+    }
 
-class APITest extends Specification {
-  
+    "allow its client to create a new empty Container" in {
+      val newCont = account.createContainer("scalage05")
+      println(newCont.listItems.isDefined)
+    }
+    
+    "allow its client to upload objects to container" in {
+      
+    }
+  }
 }

@@ -19,6 +19,8 @@ object AccountCommand extends AbstractCommand {
 class Account(account: AccountModel) {
   import scalage.ScalageConverters._
   import scalage.AccountCommand._
+  
+  def getAccountModel = account
 
   def listContainers = listAllContainers(account).containers
 
