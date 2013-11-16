@@ -8,7 +8,7 @@ import java.io.FileInputStream
 object ContainerCommand extends AbstractCommand {
 
   val listObjectsInContainer = (account: AccountModel, cont: String) =>
-    client.get(new URL(account.storageUrl + "/" + cont + "?format=json"),
+    client.get(new URL(account.storageUrl + "/" + cont + "?format=json&limit=23"),
       account.authToken).body.asString
 
   def createObject(objectToStore: SwiftObject) = (account: AccountModel, cont: String) => {
@@ -22,7 +22,7 @@ class Container(account: AccountModel, contModel: ContainerModel) {
 
   import scalage.ContainerCommand._
 
-  def listItems = Option(listObjectsInContainer(account, contModel.name).asJson.toString())
+  def listItems = listObjectsInContainer(account, contModel.name).asJson.toString()
 
-  def uploadObject(objtoStore: SwiftObject) = createObject(objtoStore)(account, contModel.name)
+  def uploadObject(objtoStore: SwiftObject): Unit = createObject(objtoStore)(account, contModel.name)
 }

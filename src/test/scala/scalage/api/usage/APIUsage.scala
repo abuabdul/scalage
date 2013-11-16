@@ -18,14 +18,7 @@ object APIUsage extends App {
 
   val cont3 = account.getContainer("scalage")
   println(cont3.isDefined)
-  //  //
-  //  val container = cont2.get
-  //  //  container.listItems
-  //  //
-  //  val f2up = new File("ppt.pptx")
-  //  val swiftObj = SwiftObject("ppt", "ppt", f2up)
-  //  container.uploadObject(swiftObj)
-  //  println(container.listItems)
+
   val account = swiftCxn.connect
 
   // val cont2 =  account.createContainer("welcome3")
@@ -44,3 +37,4 @@ object APIUsage extends App {
   // container.uploadObject(swiftObj)
   println(container.listItems)
 }
+

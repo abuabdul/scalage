@@ -10,16 +10,20 @@ import uk.co.bigbeeconsultants.http.request.RequestBody
 object AccountCommand extends AbstractCommand {
 
   val listAllContainers = (account: AccountModel) =>
-    client.get(new URL(account.storageUrl + "?format=json"), account.authToken).body.asString
+    client.get(new URL(account.storageUrl + "?format=json"),
+      account.authToken).body.asString
 
   val createNewContainer = (account: AccountModel, name: String) =>
     client.put(new URL(account.storageUrl + "/" + name), rb, account.authToken)
+
+  val removeContainer = (account: AccountModel, name: String) =>
+    client.delete(new URL(account.storageUrl + "/" + name), account.authToken)
 }
 
 class Account(account: AccountModel) {
   import scalage.ScalageConverters._
   import scalage.AccountCommand._
-  
+
   def getAccountModel = account
 
   def listContainers = listAllContainers(account).containers
@@ -29,8 +33,7 @@ class Account(account: AccountModel) {
     if (list.isEmpty) None else Option(new Container(account, list.head))
   }
 
-  def createContainer(name: String) = {
-    createNewContainer(account, name)
-    getContainer(name).get
-  }
+  def createContainer(name: String): Unit = createNewContainer(account, name)
+
+  def deleteContainer(name: String): Unit = removeContainer(account, name)
 }
