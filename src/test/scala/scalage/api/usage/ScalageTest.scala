@@ -12,7 +12,7 @@ import org.specs2.runner.JUnitRunner
 class ScalageSpecification extends Specification {
 
   val swiftCxn = SwiftConnector("admin:admin", "admin",
-    "http://15.185.162.30:8080/auth/v1.0")
+      "http://15.185.162.30:8080/auth/v1.0")
 
   val account = swiftCxn.connect
 
@@ -20,8 +20,6 @@ class ScalageSpecification extends Specification {
 
     val contcont = account.listContainers.size
     val containerName = Fixture.containerName(contcont + 1)
-
-    println("containe created with name " + containerName)
 
     "list all containters" in {
       assert(account.listContainers.isEmpty || !account.listContainers.isEmpty)
