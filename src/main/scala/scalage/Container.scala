@@ -11,7 +11,7 @@ object ContainerCommand extends AbstractCommand {
     client.get(new URL(account.storageUrl + "/" + cont + "?format=json&limit=23"),
       account.authToken).body.asString
 
-  def createObject(objectToStore: SwiftObject) = (account: AccountModel, cont: String) => {
+  def createObject(objectToStore: SwiftUploadObject) = (account: AccountModel, cont: String) => {
     client.put(new URL(account.storageUrl + "/" + cont + "/" + objectToStore.name),
       rbi(new FileInputStream(objectToStore.file)), account.authToken)
   }
@@ -24,5 +24,5 @@ class Container(account: AccountModel, contModel: ContainerModel) {
 
   def listItems = listObjectsInContainer(account, contModel.name).asJson.toString()
 
-  def uploadObject(objtoStore: SwiftObject): Unit = createObject(objtoStore)(account, contModel.name)
+  def uploadObject(objtoStore: SwiftUploadObject): Unit = createObject(objtoStore)(account, contModel.name)
 }

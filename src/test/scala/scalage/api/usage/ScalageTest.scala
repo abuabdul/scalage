@@ -4,15 +4,15 @@ import java.io.File
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import scalage.SwiftConnector
-import scalage.SwiftObject
+import scalage.SwiftUploadObject
 import java.util.Date
 import org.specs2.runner.JUnitRunner
+import scalage.SwiftUploadObject
 
 @RunWith(classOf[JUnitRunner])
 class ScalageSpecification extends Specification {
 
-  val swiftCxn = SwiftConnector("admin:admin", "admin",
-      "http://15.185.162.30:8080/auth/v1.0")
+  val swiftCxn = SwiftConnector("admin:admin", "admin", "http://15.185.162.30:8080/auth/v1.0")
 
   val account = swiftCxn.connect
 
@@ -49,5 +49,5 @@ class ScalageSpecification extends Specification {
 object Fixture {
   val containerName = (suff: Int) => "scalage_" + suff
   val f2up = new File("ppt.pptx")
-  val swiftObj = SwiftObject("ppt", "ppt", f2up)
+  val swiftObj = SwiftUploadObject("ppt", "ppt", f2up)
 }
