@@ -2,19 +2,22 @@ package scalage.api.usage
 
 import java.io.File
 import org.junit.runner.RunWith
-import org.scalatest._
+
+import scalage.Account
 import scalage.SwiftConnector
 import scalage.SwiftUploadObject
-import java.util.Date
-import scalage.SwiftUploadObject
+
+import org.scalatest.FlatSpec
+import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
-import scalage.Account
 
 @RunWith(classOf[JUnitRunner])
 class ScalageSpecification extends FlatSpec with Matchers {
+  
   var account: Option[Account] = None
   var containerName = ""
   var contcont = 0
+  
   "After login, Scalage's Account object" should "pass test " in {
     val swiftCxn = SwiftConnector("admin:admin", "admin", "http://15.185.162.30:8080/auth/v1.0")
     account = Option(swiftCxn.connect)

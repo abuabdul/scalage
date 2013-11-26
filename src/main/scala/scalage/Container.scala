@@ -23,6 +23,5 @@ class Container(account: AccountModel, contModel: ContainerModel) {
   import scalage.ContainerCommand._
 
   def listItems = listObjectsInContainer(account, contModel.name).asJson.toString()
-
   def uploadObject(objtoStore: SwiftUploadObject): Unit = createObject(objtoStore)(account, contModel.name)
 }
