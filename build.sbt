@@ -1,5 +1,7 @@
 name := "scala-swift"
 
+version := "0.0.2-SNAPSHOT"
+
 libraryDependencies ++= Seq(
 	"uk.co.bigbeeconsultants" % "bee-client_2.10" % "0.22.7",
 	"io.spray" % "spray-json_2.10" % "1.2.5",
